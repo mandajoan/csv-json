@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { DropZone } from "../lib";
 import moment from 'moment'
-import { watch } from "fs";
+
 
 class App extends Component {
   state = {
@@ -18,7 +18,7 @@ class App extends Component {
             if (m === this.state.input) {
                 
                 data[i].email = this.state.email
-                console.log(data[i])
+               
                 delete data[i].NOTES
                 delete data[i].LOCATION
                 delete data[i].PRIORITY
@@ -27,6 +27,7 @@ class App extends Component {
                 delete data[i].DUE
 
                 let item = {
+                    'Description': data[i].SUMMARY,
                     'Start-Date': data[i]["DTSTART-DATE"], 
                     'End-Date': data[i]["DTEND-DATE"], 
                     'Start-Time': data[i]["START-TIME"], 
@@ -40,7 +41,7 @@ class App extends Component {
             
           
         }
-        console.log(filteredResults)
+        
         window.JSONToCSVConvertor(filteredResults, "Matt's Hours", true)
     }
     handleChange(e) {
@@ -51,8 +52,7 @@ class App extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        console.log(e)
-        console.log(this.state.input)
+  
     }
 
 
