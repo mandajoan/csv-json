@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\dist",
+    "\\public",
+    "\\src",
+    "\\src\\examples"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\.git",
   "PreviewInSolutionExplorer": false
 }

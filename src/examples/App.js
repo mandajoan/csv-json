@@ -12,9 +12,28 @@ class App extends Component {
         for (var i = 0; i < data.length; i++) {
  
             let m = moment(data[i]["DTSTART-DATE"]).format('MM')
+           
+ 
             if (m === this.state.input) {
-               
-                filteredResults.push(data[i])
+                
+                data[i].email = this.state.email
+                console.log(data[i])
+                delete data[i].NOTES
+                delete data[i].LOCATION
+                delete data[i].PRIORITY
+                delete data[i].URL
+                delete data[i].ATTENDEE
+                delete data[i].DUE
+
+                let item = {
+                    'Start-Date': data[i]["DTSTART-DATE"], 
+                    'End-Date': data[i]["DTEND-DATE"], 
+                    'Start-Time': data[i]["START-TIME"], 
+                    'End-Time': data[i]["END-TIME"],
+                    'Email': data[i].email
+
+                }
+                filteredResults.push(item)
                 
             }
             
@@ -25,6 +44,9 @@ class App extends Component {
     }
     handleChange(e) {
         this.setState({input: e.target.value})
+    }
+    handleEmailChange(e) {
+        this.setState({email: e.target.value})
     }
     handleSubmit(e) {
         e.preventDefault()
@@ -74,7 +96,7 @@ class App extends Component {
                       <br />
                       <form style={formStyle}>
                       <input type="text" onChange={this.handleChange.bind(this)} placeholder="MM"></input>
-                      
+                          <input type="text" onChange={this.handleEmailChange.bind(this)} placeholder="email"></input>
                   </form>
               </div>
           
