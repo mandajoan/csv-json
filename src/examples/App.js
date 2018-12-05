@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { DropZone } from "../lib";
 import moment from 'moment'
+import { watch } from "fs";
 
 class App extends Component {
   state = {
@@ -64,7 +65,9 @@ class App extends Component {
             borderWidth: '2px',
             borderColor: 'rgb(102, 102, 102)',
             borderStyle: 'dashed',
-            borderRadius: '5px'
+            borderRadius: '5px', 
+            display: 'table', 
+            cursor: 'pointer'
         }
 
         var containerStyle = {
@@ -87,16 +90,25 @@ class App extends Component {
             borderStyle: 'solid',
             borderWidth: '5px'
         }
+
+        var styledP ={
+            textAlign: 'center',
+            verticalAlign: 'middle',
+            display: 'table-cell',
+            fontWeight: 'bold'
+        }
       return (
           <div className="container" style={containerStyle}>
               <h2 style={formStyle}>Tracked Tasks - Filter by Month</h2>
               <div className="row" style={rowStyle}>
                   <div className="col-md-6" style={colStyle}>
-                      <h3>Step 1: Input Month</h3>
+                      <h3>Step 1: Input Month (MM) & Email</h3>
                       <br />
                       <form style={formStyle}>
-                      <input type="text" onChange={this.handleChange.bind(this)} placeholder="MM"></input>
-                          <input type="text" onChange={this.handleEmailChange.bind(this)} placeholder="email"></input>
+                          <input type="text" onChange={this.handleChange.bind(this)} placeholder="MM"></input>
+                          <br />
+                          <br />
+                          <input type="text" onChange={this.handleEmailChange.bind(this)} placeholder="Email"></input>
                   </form>
               </div>
           
@@ -110,8 +122,9 @@ class App extends Component {
                             this.convertCvs()
                         });
             }}
-          >
-            <p>Add a file and see for yourself</p>
+                      >
+                         
+                          <p style={styledP} >Add a CSV File</p>
                 </DropZone>
                 
          
