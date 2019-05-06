@@ -10,13 +10,17 @@ class App extends Component {
     convertCvs() {
         let data = this.state.jsonResult
        let filteredResults = []
+       let m
         for (var i = 0; i < data.length; i++) {
- 
-            let m = moment(data[i]["DTSTART-DATE"]).format('MM')
+          
+            m = moment(data[i]["DTSTART-DATE"]).format('MM')
+            //get all items in that month
+            // //get all items that == input day & within the next 7 days
+            // console.log(m)
+            // console.log(m.day())
            
- 
             if (m === this.state.input) {
-                
+                // console.log('here')
                 data[i].email = this.state.email
                
                 delete data[i].NOTES
@@ -28,10 +32,10 @@ class App extends Component {
 
                 let item = {
                     'Description': data[i].SUMMARY,
-                    'Start-Date': data[i]["DTSTART-DATE"], 
-                    'End-Date': data[i]["DTEND-DATE"], 
-                    'Start-Time': data[i]["START-TIME"], 
-                    'End-Time': data[i]["END-TIME"],
+                    'Start date': data[i]["DTSTART-DATE"], 
+                    'End date': data[i]["DTEND-DATE"], 
+                    'Start time': moment(data[i]["START-TIME"], 'h:mm A').format('HH:mm:ss'), 
+                    'End time': moment(data[i]["END-TIME"], 'h:mm A').format('HH:mm:ss'),
                     'Email': data[i].email
 
                 }
@@ -42,7 +46,7 @@ class App extends Component {
           
         }
         
-        window.JSONToCSVConvertor(filteredResults, "Matt's Hours", true)
+        window.JSONToCSVConvertor(filteredResults, m, true)
     }
     handleChange(e) {
         this.setState({input: e.target.value})
@@ -124,7 +128,7 @@ class App extends Component {
             }}
                       >
                          
-                          <p style={styledP} >Add a CSV File</p>
+                          <p style={styledP}>Add a CSV File</p>
                 </DropZone>
                 
          
